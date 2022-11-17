@@ -14,8 +14,8 @@ def get_data(stocks, start, end):
     covMatrix = returns.cov()
     return meanReturns, covMatrix
 
-stockList = ["RIG","SU", "CCJ", "VRTX", "PYPL", "APPS", "BNTX", "OSTK",
-            "PHGP.L", "PHSP.L", "FRES.L", "BMY", "LMT"]
+stockList = ["RIG","SU", "CCJ", "VRTX", "PYPL", "OSTK",
+             "APPS","FRES.L", "BMY", "LMT", "PHGP.L", "PHSP.L"] #BNTX and RICA mess with data output
 #stocks = [stock + '.L' for stock in stockList]
 endDate = dt.datetime.now()
 startDate = endDate - dt.timedelta(days = 300)
@@ -29,7 +29,7 @@ print(weights)
 
 ##MonteCarlo Method
 mc_sims = 1000
-T = 100 #tf in days
+T = 10 #tf in days
 
 #creating matrices
 meanM = np.full(shape=(T, len(weights)), fill_value=meanReturns)
@@ -41,13 +41,16 @@ initialPortfolio = 10000
 
 for m in range(0, mc_sims):
     #MC Loops
-    #cholesky decomposition
     Z = np.random.normal(size = (T, len(weights)))
-    L = np.linalg.cholesky(covMatrix) #lower triangle
+    L = np.linalg.cholesky(covMatrix) #lower triangle,cholesky decomposition
     dailyReturns = meanM + np.inner(L,Z)
-    portfolio_sims[:,m] = np.cumprod(np.inner(weights, dailyReturns.T)+1)*initialPortfolio #cumulative returns over the 100 days of simulation
+    if m == 0:
+        portfolio_sims[:,m] = initialPortfolio
+    else:
+        portfolio_sims[:,m] = np.cumprod(np.inner(weights, dailyReturns.T)+1)*initialPortfolio #cumulative returns over the 100 days of simulation
 
 plt.plot(portfolio_sims)
+#plt.legend(stockList)
 plt.ylabel("Portfolio Value")
 plt.xlabel("Days")
 plt.title("MC Simulation of The Spark Portfolio")
