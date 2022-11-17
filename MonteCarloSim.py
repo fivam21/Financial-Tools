@@ -15,7 +15,7 @@ def get_data(stocks, start, end):
     return meanReturns, covMatrix
 
 stockList = ["RIG","SU", "CCJ", "VRTX", "PYPL", "APPS", "BNTX", "OSTK",
-            "PHGP.L", "PHSP.L", "FRES.L", "RICA.L", "BMY", "LMT"]
+            "PHGP.L", "PHSP.L", "FRES.L", "BMY", "LMT"]
 #stocks = [stock + '.L' for stock in stockList]
 endDate = dt.datetime.now()
 startDate = endDate - dt.timedelta(days = 300)
@@ -28,7 +28,7 @@ weights /= np.sum(weights)
 print(weights)
 
 ##MonteCarlo Method
-mc_sims = 100
+mc_sims = 1000
 T = 100 #tf in days
 
 #creating matrices
