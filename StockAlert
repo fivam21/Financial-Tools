@@ -52,8 +52,8 @@ client = Client(account_sid, auth_token)
 for article in formatted_articles:
     message = client.messages.create(
         body=article,
-        from="+447897037208",
-        to="+447912600589",
+        from="+447_____",
+        to="+447_____",
     )
 
 
