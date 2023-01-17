@@ -5,7 +5,7 @@ from twilio.rest import Client
 
 STOCK = ["TSLA"] #, "AAPL", "META", "AMZN"] #.LON for LDN tickers
 COMPANY_NAME = ["Tesla Inc"] #, "Apple", "Meta Platforms", "Amazon"]
-API_Key = "LOVONQ181H5RKAHZ"
+API_Key = "_______"
 
 url = "https://www.alphavantage.co/query"
 parameters = {
@@ -28,7 +28,7 @@ if abs(per_change) > 5:
 # Get relevant news
 if get_news:
     news_url = "https://newsapi.org/v2/everything"
-    news_key = "148bcda76e64456ca601f890a19a643d"
+    news_key = "________"
     news_parameters = {
         "q": "Tesla",
         "from": dt.date.today(),
