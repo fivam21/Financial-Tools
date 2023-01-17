@@ -1,0 +1,59 @@
+import requests
+import datetime as dt
+import os
+from twilio.rest import Client
+
+STOCK = ["TSLA"] #, "AAPL", "META", "AMZN"] #.LON for LDN tickers
+COMPANY_NAME = ["Tesla Inc"] #, "Apple", "Meta Platforms", "Amazon"]
+API_Key = "LOVONQ181H5RKAHZ"
+
+url = "https://www.alphavantage.co/query"
+parameters = {
+    "function": "TIME_SERIES_DAILY_ADJUSTED",
+    "symbol": STOCK,
+    "apikey": API_Key,
+}
+
+# Get difference between close and open
+get_news = False
+r = requests.get(url=url, params=parameters)
+data = r.json()["Time Series (Daily)"]
+data_today = data["2023-01-13"]["1. open"]
+data_yday = data["2023-01-12"]["4. close"]
+
+per_change = ((float(data_today) - float(data_yday)) / float(data_today)) * 100
+if abs(per_change) > 5:
+    get_news = True
+
+# Get relevant news
+if get_news:
+    news_url = "https://newsapi.org/v2/everything"
+    news_key = "148bcda76e64456ca601f890a19a643d"
+    news_parameters = {
+        "q": "Tesla",
+        "from": dt.date.today(),
+        "sortBy": "popularity",
+        "apiKey": news_key,
+        "language": "en"
+    }
+
+    news = requests.get(url=news_url, params=news_parameters)
+    articles = news.json()["articles"]
+    three_articles = articles[:3]
+
+# Send automated text
+formatted_articles = [f"Headline: {article['title']}. \nBrief: {article['description']} \nURL: {article['url']}"
+                     for article in three_articles]
+
+account_sid = "AC9db7800ebe4bae8da38c55de322cf1e5"
+auth_token = "ac71e6ecc91a47b3cbf504cc91725408"
+client = Client(account_sid, auth_token)
+
+for article in formatted_articles:
+    message = client.messages.create(
+        body=article,
+        from="+447897037208",
+        to="+447912600589",
+    )
+
+
