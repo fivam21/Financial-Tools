@@ -5,7 +5,7 @@ from twilio.rest import Client
 
 STOCK = ["TSLA"] #, "AAPL", "META", "AMZN"] #.LON for LDN tickers
 COMPANY_NAME = ["Tesla Inc"] #, "Apple", "Meta Platforms", "Amazon"]
-API_Key = "___"
+API_Key = os.environ["api_key"]
 
 url = "https://www.alphavantage.co/query"
 parameters = {
@@ -43,8 +43,8 @@ if abs(per_change) > 5:
     # Send automated text
     formatted_articles = [f"{STOCK}: {per_change}%\nHeadline: {article['title']}.\nURL: {article['url']}" for article in three_articles]
     
-    account_sid = "____"
-    auth_token = "___"
+    account_sid = os.environ["acc_sid"]
+    auth_token = os.environ["auth_tok"]
     client = Client(account_sid, auth_token)
 
     for article in formatted_articles:
