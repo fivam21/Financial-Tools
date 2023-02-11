@@ -1,11 +1,11 @@
-#Monte Carlo Method to simulate stock returns
+# Monte Carlo Method to simulate stock returns
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
 from pandas_datareader import data as pdr 
 
-#Import data
+# Import data
 def get_data(stocks, start, end):
     stockData = pdr.get_data_yahoo(stocks, start, end)
     stockData = stockData['Close']
@@ -27,7 +27,7 @@ weights /= np.sum(weights)
 
 print(weights)
 
-##MonteCarlo Method
+# MonteCarlo Method
 mc_sims = 1000
 T = 10 #tf in days
 
