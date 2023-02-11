@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
-from pandas_datareader import data as pdr #yahoo specific data
+from pandas_datareader import data as pdr 
 
 #Import data
 def get_data(stocks, start, end):
@@ -15,8 +15,8 @@ def get_data(stocks, start, end):
     return meanReturns, covMatrix
 
 stockList = ["RIG","SU", "CCJ", "VRTX", "PYPL", "OSTK",
-             "APPS","FRES.L", "BMY", "LMT", "PHGP.L", "PHSP.L"] #BNTX and RICA mess with data output
-#stocks = [stock + '.L' for stock in stockList]
+             "APPS","FRES.L", "BMY", "LMT", "PHGP.L", "PHSP.L"] 
+
 endDate = dt.datetime.now()
 startDate = endDate - dt.timedelta(days = 300)
 
@@ -50,7 +50,7 @@ for m in range(0, mc_sims):
         portfolio_sims[:,m] = np.cumprod(np.inner(weights, dailyReturns.T)+1)*initialPortfolio #cumulative returns over the 100 days of simulation
 
 plt.plot(portfolio_sims)
-#plt.legend(stockList)
+plt.legend(stockList)
 plt.ylabel("Portfolio Value")
 plt.xlabel("Days")
 plt.title("MC Simulation of The Spark Portfolio")
