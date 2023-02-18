@@ -3,7 +3,7 @@ import datetime as dt
 import os
 from twilio.rest import Client
 
-STOCK = ["TSLA"] #, "AAPL", "META", "AMZN"] #.LON for LDN tickers
+STOCK = ["APPS"] #, "AAPL", "META", "AMZN"] 
 COMPANY_NAME = ["Tesla Inc"] #, "Apple", "Meta Platforms", "Amazon"]
 API_Key = os.environ["api_key"]
 
