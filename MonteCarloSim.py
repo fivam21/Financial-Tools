@@ -25,7 +25,7 @@ meanReturns, covMatrix = get_data(stockList, startDate, endDate)
 weights = np.random.random(len(meanReturns))
 weights /= np.sum(weights)
 
-print(weights)
+print(weights) 
 
 # MonteCarlo Method
 mc_sims = 1000
