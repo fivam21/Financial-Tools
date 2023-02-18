@@ -4,7 +4,7 @@ import os
 from twilio.rest import Client
 
 STOCK = ["APPS"] #, "AAPL", "META", "AMZN"] 
-COMPANY_NAME = ["Tesla Inc"] #, "Apple", "Meta Platforms", "Amazon"]
+COMPANY_NAME = ["Tesla Inc"] # , "Apple", "Meta Platforms", "Amazon"]
 API_Key = os.environ["api_key"]
 
 url = "https://www.alphavantage.co/query"
