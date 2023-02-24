@@ -5,13 +5,6 @@ headers = {'Content-type': 'application/json'}
 data = json.dumps({"seriesid": ['LNS14000000', 'CUUR0000SA0', 'CES0000000001', ''], "startyear": "2019", "endyear": "2023"})
 # https://beta.bls.gov/dataViewer/view/timeseries/LNS14000000
 p = requests.post('https://api.bls.gov/publicAPI/v2/timeseries/data/', data=data, headers=headers)
-# # Error Repsonses:
-# 1XX: Hold on
-# 2XX: Here you go 
-# 3XX: Go away
-# 4XX: You screwed up
-# 5XX: I screwed up
-# can use:
 p.raise_for_status()
 
 json_data = json.loads(p.text)
