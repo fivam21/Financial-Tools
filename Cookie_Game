@@ -1,3 +1,4 @@
+# Cookie Maker game - working with HTML
 from selenium import webdriver
 import time
 
